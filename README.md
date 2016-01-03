@@ -22,5 +22,5 @@ Support / Contribute stuff can go here I think, [@analog-nico][analog-nico]?
   - Link to Request architecture docs etc.
 
 
-  [too-much-stress]: images/tms.gif
+  [too-much-stress]: images/tms.gif (Too Much Stress)
   [analog-nico]: https://github.com/analog-nico
