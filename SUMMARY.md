@@ -6,3 +6,4 @@
 * [Features](docs/features/index.md)
   * [Authentication](docs/features/auth.md)
   * [Cookies](docs/features/cookies.md)
+* [Request Next](docs/next/index.md)
