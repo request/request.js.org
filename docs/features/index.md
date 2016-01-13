@@ -1,2 +1,2 @@
 
-# Lots of features yay!
+# Features
