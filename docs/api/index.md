@@ -2,24 +2,47 @@
 
 Full API documentation in the style of the current Request README
 
-## Function Call
+## Call
 
 ````js
-request (
-  [string uri],
-  [Object options],
-  [Function callback]
-) -> Request
+request ([uri], [options], [callback]) => Request
 ````
 
-If you do not supply a string `uri`, then you **MUST** set the `uri` property on the `options` object.
-It sends an HTTP request and returns a [Request](#Request) object.
+- `uri`
+  - Type: {`string`}
+  - Optional
+
+  If you do not supply a string `uri`, then you **MUST** set the `uri` property on the `options` object.
+
+- `options`
+  - Type: {[`RequestOptions`](./interfaces/request-options.md)}
+  - Optional
+
+- `callback`
+  - Type: {`Function (err, res, body) => any`}
+    - `err` {`Error` | `null`}: An eventual error
+    - `res` {[`Response`](./classes/response.md)}: The server's response
+    - `body` {`sintr` | `Buffer` | `JSONObject`}
+  - Optional
+
+- **return**
+  - Type: {[`Request`](./classes/request.md)}
+
+
+This function performs an HTTP request and returns a [Request](./classes/request.md) object.
+
 
 ## Functions
 
-The `request` namespace exposes the following functions.
+The `request` namespace exposes the following functions:
 
 ### request.defaults(options)
+
+- `options`
+  - Type: {[`RequestOptions`](./interfaces/request-options.md)}
+  - Optional
+- **return**
+  - Type: {`RequestAPI`}
 
 This method **returns a wrapper** around the normal request API that defaults
 to whatever options you pass to it.
@@ -44,54 +67,55 @@ var specialRequest = baseRequest.defaults({
 })
 ```
 
-### request.put
+### request.put (uri, options, callback)
 
-Same as `request()`, but defaults to `method: "PUT"`.
+Alias for a [`request` call](#call), but defaults to `method: "PUT"`.
 
 ```js
 request.put(url)
 ```
 
-### request.patch
+### request.patch (uri, options, callback)
 
-Same as `request()`, but defaults to `method: "PATCH"`.
+Alias for a [`request` call](#call), but defaults to `method: "PATCH"`.
 
 ```js
 request.patch(url)
 ```
 
-### request.post
+### request.post (uri, options, callback)
 
-Same as `request()`, but defaults to `method: "POST"`.
+Alias for a [`request` call](#call), but defaults to `method: "POST"`.
 
 ```js
 request.post(url)
 ```
 
-### request.head
+### request.head (uri, options, callback)
 
-Same as `request()`, but defaults to `method: "HEAD"`.
+Alias for a [`request` call](#call), but defaults to `method: "HEAD"`.
 
 ```js
 request.head(url)
 ```
 
-### request.del / request.delete
+### request.del (uri, options, callback) / request.delete (uri, options, callback)
 
-Same as `request()`, but defaults to `method: "DELETE"`.
+Alias for a [`request` call](#call), but defaults to `method: "DELETE"`.
 
 ```js
 request.del(url)
 request.delete(url)
 ```
 
-### request.get
+### request.get (uri, options, callback)
 
-Same as `request()` (for uniformity).
+Alias for a [`request` call](#call) (for uniformity).
 
 ```js
 request.get(url)
 ```
+
 ### request.cookie
 
 Function that creates a new cookie.
