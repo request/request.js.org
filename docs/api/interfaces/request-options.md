@@ -368,14 +368,16 @@ embedding the auth info in the `uri`).
 
 ## `strictSSL`
 
-- Type: {`boolean`} (default: `false`)
+- Type: {`boolean`}
+- Default: `false`
 
 If `true`, requires SSL certificates be valid. **Note:** to use your own certificate authority, you need to specify an
 agent that was created with that CA as an option.
 
 ## `tunnel`
 
-- Type: {`boolean` | `undefined`} (default: `undefined`)
+- Type: {`boolean` | `undefined`}
+- Default: `undefined`
 
 Controls the behavior of [HTTP `CONNECT` tunneling](https://en.wikipedia.org/wiki/HTTP_tunnel#HTTP_CONNECT_tunneling)
 as follows:
@@ -422,5 +424,5 @@ Alternatively pass the request's callback in the options object.
 The callback argument gets 3 arguments:
 
 1. An `error` when applicable (usually from [`http.ClientRequest`](http://nodejs.org/api/http.html#http_class_http_clientrequest) object)
-2. A [`Response`](#response) object
+2. A [`Response`](#../classes/response.md) object
 3. The third is the `response` body (`String` or `Buffer`, or JSON object if the `json` option is supplied)
