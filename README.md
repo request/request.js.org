@@ -17,7 +17,6 @@ request('http://www.google.com', function (error, response, body) {
 - [Request Next][request-next]
 
 
-  [too-much-stress]: images/tms.gif (Too Much Stress)
   [analog-nico]: https://github.com/analog-nico
   [gitter]: https://gitter.im/request/request
   [npm]: https://www.npmjs.com/package/request
