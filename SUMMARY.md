@@ -1,6 +1,7 @@
 
 # Summary
 
+- [Getting Started](docs/getting-started.md)
 - [Request](docs/request-legacy/index.md)
   - [Features](docs/request-legacy/features/index.md)
     - [Authentication](docs/request-legacy/features/auth.md)
