@@ -1,26 +1,20 @@
+<div style="text-align: center;">
+  <img src="https://cdn.rawgit.com/request/request.github.io/master/images/logo.svg" alt="Request logo" style="width: 100%; max-width: 400px;">
+  <h1 style="margin-top: 0;">Request</h1>
+  <p>Simplified HTTP request client.</p>
+</div>
 
-# Request
+---
 
-```js
-var request = require('request')
-request('http://www.google.com', function (error, response, body) {
-  if (!error && response.statusCode == 200) {
-    console.log(body) // Show the HTML for the Google homepage.
-  }
-})
-```
+## Main library `request`
 
-- [Gitter Chat][gitter]
-- [NPM Package][npm]
-- [Promises Interface][request-promise]
-- [Changelog][changelog]
-- [Request Next][request-next]
+- [Gitter Chat](https://gitter.im/request/request)
+- [NPM Package](https://www.npmjs.com/package/request)
+- [Changelog](https://github.com/request/request/blob/master/CHANGELOG.md)
+- [Request Next](https://github.com/request/core)
 
+## Promises extension `request-promise`
 
-  [too-much-stress]: images/tms.gif (Too Much Stress)
-  [analog-nico]: https://github.com/analog-nico
-  [gitter]: https://gitter.im/request/request
-  [npm]: https://www.npmjs.com/package/request
-  [request-promise]: https://github.com/request/request-promise
-  [request-next]: https://github.com/request/core
-  [changelog]: https://github.com/request/request/blob/master/CHANGELOG.md
+- [Gitter Chat](https://gitter.im/request/request-promise)
+- [NPM Package](https://www.npmjs.com/package/request-promise)
+- [Changelog](https://github.com/request/request-promise#change-history)

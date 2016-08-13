@@ -1,9 +1,10 @@
 
 # Summary
 
-* [API](docs/api/index.md)
-* [Promises](docs/promises/index.md)
-* [Features](docs/features/index.md)
-  * [Authentication](docs/features/auth.md)
-  * [Cookies](docs/features/cookies.md)
-* [Request Next](docs/next/index.md)
+- [Getting Started](docs/getting-started.md)
+- [Request](docs/request-legacy/index.md)
+  - [Features](docs/request-legacy/features/index.md)
+    - [Authentication](docs/request-legacy/features/auth.md)
+    - [Cookies](docs/request-legacy/features/cookies.md)
+- [Request Promise](docs/request-promise/index.md)
+- [Request Next](docs/request-next/index.md)
