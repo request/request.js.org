@@ -1,4 +1,8 @@
-/.idea
+# Builds
 /_book
 
+# Editors
+/.idea
+
+# System files
 .DS_Store
