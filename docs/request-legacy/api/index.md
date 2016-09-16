@@ -25,22 +25,22 @@ request (options, [callback]) => Request
 ```
 
 - `uri`
-  - Type: {`string`}
+  - Type: `string` 
 
 - `options`
-  - Type: {[`RequestOptions`](./interfaces/request-options.md)}
+  - Type: [`RequestOptions`](./interfaces/request-options.md)
   
   If you use the second signature (without the `uri` string), then you **MUST** set the `uri` property on the
   `options` object.
 
 - `callback`
-  - Type: {`Function (err, res, body) => any`}
-    - `err` {`Error` | `null`}: An eventual error
-    - `res` {[`Response`](./classes/response.md)}: The server's response
-    - `body` {`string` | `Buffer` | `JSONObject`}
+  - Type: `Function (err, res, body) => any`
+    - `err` (`Error` | `null`): An eventual error
+    - `res` ([`Response`](./classes/response.md)): The server's response
+    - `body` (`string` | `Buffer` | `JSONObject`): **TODO**
 
 - **return**
-  - Type: {[`Request`](./classes/request.md)}
+  - Type: { [`Request`](./classes/request.md) }
   
   An object representing the current request.
 
@@ -58,10 +58,10 @@ The `request` namespace exposes the following functions:
 ### request.defaults(options)
 
 - `options`
-  - Type: {[`RequestOptions`](./interfaces/request-options.md)}
+  - Type: [`RequestOptions`](./interfaces/request-options.md)
   - Optional
 - **return**
-  - Type: {[`RequestAPI`](#requestapi)}
+  - Type: [`RequestAPI`](#requestapi)
 
 This method **returns a wrapper** around the normal request API that defaults
 to whatever options you pass to it.
@@ -142,10 +142,10 @@ request.get(url)
 Function that creates a new cookie.
 
 - `str`
-  - Type: {`string`}
+  - Type: `string`
 
 - **return**
-  - Type: {[`Cookie`][tough-cookie-cookie]}
+  - Type: [`Cookie`][tough-cookie-cookie]
 
 Note: this is a wrapper for [`tough-cookie`][tough-cookie]'s [`Cookie.parse`][tough-cookie-cookie-parse] function.
 
@@ -161,10 +161,10 @@ var cookie = request.cookie('key1=value1');
 Function that creates a new cookie jar.
 
 - `store`
-  - Type: {[`Store`][tough-cookie-store]}
+  - Type: [`Store`][tough-cookie-store]
 
 - **return**
-  - Type: {[`RequestJar`](./classes/request-jar.md)}
+  - Type: [`CookieJar`](./classes/cookie-jar.md)
 
 #### Example
 

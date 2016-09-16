@@ -63,19 +63,19 @@ All the properties are optional (except if you do not provide an `uri` argument 
 
 ## `uri`
 
-- Type: {`string` | [`Url`](https://nodejs.org/dist/latest-v6.x/docs/api/url.html)}
+- Type: `string` | [`Url`](https://nodejs.org/dist/latest-v6.x/docs/api/url.html)
 
 Fully qualified uri or a parsed url object from `url.parse()`.
 
 ## `url`
 
-- Type: {`string` | [`Url`](https://nodejs.org/dist/latest-v6.x/docs/api/url.html)}
+- Type: `string` | [`Url`](https://nodejs.org/dist/latest-v6.x/docs/api/url.html)
 
 Alias for [`uri`](#uri)
 
 ## `baseUrl`
 
-- Type: {`string`}
+- Type: `string`
 
 Fully qualified uri string used as the base url. Most useful with `request.defaults`, for example when you want to do
 many requests to the same domain.  If `baseUrl` is `https://example.com/api/`, then requesting `/end/point?test=true`
@@ -83,14 +83,14 @@ will fetch `https://example.com/api/end/point?test=true`. When `baseUrl` is give
 
 ## `method`
 
-- Type: {`string`}
+- Type: `string`
 - Default: `"GET"`
 
 The HTTP method to use.
 
 ## `headers`
 
-- Type: {`Object`}
+- Type: `Object`
 - Default: `{}`
 
 The HTTP headers to send.
@@ -99,13 +99,13 @@ The HTTP headers to send.
 
 ## `qs`
 
-- Type: {`Object`}
+- Type: `Object`
 
 A dictionary containing querystring values to be appended to the `uri`.
 
 ## `qsParseOptions`
 
-- Type: {`Object`}
+- Type: `Object`
 
 Object containing options to pass to the [qs.parse](https://github.com/hapijs/qs#parsing-objects) method. Alternatively
 pass options to the [querystring.parse](https://nodejs.org/docs/v0.12.0/api/querystring.html#querystring_querystring_parse_str_sep_eq_options)
@@ -113,7 +113,7 @@ method using this format `{sep:';', eq:':', options:{}}`.
 
 ## `qsStringifyOptions`
 
-- Type: {`Object`}
+- Type: `Object`
 
 Object containing options to pass to the [qs.stringify](https://github.com/hapijs/qs#stringifying) method. Alternatively
 pass options to the  [querystring.stringify](https://nodejs.org/docs/v0.12.0/api/querystring.html#querystring_querystring_stringify_obj_sep_eq_options)
@@ -122,7 +122,7 @@ strings using the `qs` module pass the `arrayFormat` option with one of `indices
 
 ## `useQuerystring`
 
-- Type: {`boolean`}
+- Type: `boolean`
 - Default : `false`
 
 If true, use `querystring` to stringify and parse querystrings, otherwise use `qs`. Set this option to `true` if you
@@ -132,13 +132,13 @@ need arrays to be serialized as `foo=bar&foo=baz` instead of the default `foo[0]
 
 ## `body`
 
-- Type: {`Buffer` | `string` | `ReadStream` | `JSONSerializableObject`}
+- Type: `Buffer` | `string` | `ReadStream` | `JSONSerializableObject`
 
 Entity body for PATCH, POST and PUT requests. If `json` is `true`, then `body` must be a JSON-serializable object.
 
 ## `form`
 
-- Type: {`Object` | `string`}
+- Type: `Object` | `string`
 
 When passed an object or a querystring, this sets `body` to a querystring representation of value, and adds
 `Content-type: application/x-www-form-urlencoded` header. When passed no options, a `FormData` instance is returned (and
@@ -152,7 +152,7 @@ Data to pass for a `multipart/form-data` request. See [Forms](guides/forms.md) g
 
 ## `multipart`
 
-- Type: {`Array<Object>` | `{chunked: Boolean, data: Array<Object>}`}
+- Type: `Array<Object>` | `{chunked: Boolean, data: Array<Object>}`
 
 Array of objects which contain their own headers and `body` attributes. Sends a `multipart/related` request. See
 [Forms](guides/forms.md) guide.
@@ -163,21 +163,21 @@ requests, data items with body streams are not allowed.
 
 ## `preambleCRLF`
 
-- Type: {`boolean`}
+- Type: `boolean`
 - Default : `false`
 
 Append a newline/CRLF before the boundary of your `multipart/form-data` request.
 
 ## `postambleCRLF`
 
-- Type: {`boolean`}
+- Type: `boolean`
 - Default : `false`
 
 Append a newline/CRLF at the end of the boundary of your `multipart/form-data` request.
 
 ## `json`
 
-- Type: {`boolean`}
+- Type: `boolean`
 - Default : `false`
 
 Sets `body` to JSON representation of value and adds `Content-type: application/json` header.  Additionally, parses the
@@ -185,14 +185,14 @@ response body as JSON.
 
 ## `jsonReviver`
 
-- Type: {`Function`}
+- Type: `Function`
 
 A [reviver function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse) that
 will be passed to `JSON.parse()` when parsing a JSON response body.
 
 ## `jsonReplacer`
 
-- Type: {`Function`}
+- Type: `Function`
 
 A [replacer function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
 that will be passed to `JSON.stringify()` when stringifying a JSON request body.
@@ -201,26 +201,26 @@ that will be passed to `JSON.stringify()` when stringifying a JSON request body.
 
 ## `auth`
 
-- Type: {[`AuthOptions`](#authoptions)}
+- Type: [`AuthOptions`](#authoptions)
 
 See [HTTP Authentication](guides/http-authentication.md) guide.
 
 ## `oauth`
 
-- Type: {[`OAuthOptions`](#oauthoptions)}
+- Type: [`OAuthOptions`](#oauthoptions)
 
 Options for OAuth HMAC-SHA1 signing. See [OAuth Signing](guides/oauth-signing.md) guide.
 
 ## `hawk`
 
-- Type: {`Object`}
+- Type: `Object`
 
 Options for [Hawk signing](https://github.com/hueniverse/hawk). The `credentials` key must contain the necessary signing
 info, [see hawk docs for details](https://github.com/hueniverse/hawk#usage-example).
 
 ## `aws`
 
-- Type: {`Object`}
+- Type: `Object`
 
 Object containing AWS signing information. Should have the properties `key`, `secret`. Also requires the property
 `bucket`, unless you’re specifying your `bucket` as part of the path, or the request doesn’t use a bucket (i.e. GET
@@ -229,7 +229,7 @@ is version 2. **Note:** you need to `npm install aws4` first.
 
 ## `httpSignature`
 
-- Type: {`Object`}
+- Type: `Object`
 
 Options for the [HTTP Signature Scheme](https://github.com/joyent/node-http-signature/blob/master/http_signing.md) using
 [Joyent's library](https://github.com/joyent/node-http-signature). The `keyId` and `key` properties must be specified.
@@ -239,7 +239,7 @@ See the docs for other options.
 
 ## `followRedirect`
 
-- Type: {`boolean`}
+- Type: `boolean`
 - Default: `true`
 
 Follow HTTP 3xx responses as redirects. This property can also be implemented as function which gets `response` object
@@ -247,21 +247,21 @@ as a single argument and should return `true` if redirects should continue or `f
 
 ## `followAllRedirects`
 
-- Type: {`boolean`}
+- Type: `boolean`
 
 
 Follow non-GET HTTP 3xx responses as redirects.
 
 ## `maxRedirects`
 
-- Type: {`number`}
+- Type: `number`
 - Default: `10`
 
 The maximum number of redirects to follow.
 
 ## `removeRefererHeader`
 
-- Type: {`boolean`}
+- Type: `boolean`
 - Default: `false`
 
 Removes the referer header when a redirect happens.
@@ -271,7 +271,7 @@ Removes the referer header when a redirect happens.
 
 ## `encoding`
 
-- Type: {`string` | `null` | `undefined`}
+- Type: `string` | `null` | `undefined`
 - Default: `undefined`
 
 Encoding to be used on `setEncoding` of response data. If `null`, the `body` is returned as a `Buffer`. Anything else
@@ -281,7 +281,7 @@ should set `encoding: null`.)
 
 ## `gzip`
 
-- Type: {`boolean`}
+- Type: `boolean`
 - Default: `false`
 
 If `true`, add an `Accept-Encoding` header to request compressed content encodings from the server (if not already
@@ -292,7 +292,7 @@ function) but is not performed on the `response` stream (available from the `res
 
 ## `jar`
 
-- Type: {`boolean` | `RequestCookieJar`}
+- Type: `boolean` | `RequestCookieJar`
 - Default: `false`
 
 If `true`, remember cookies for future use (or define your custom cookie jar; see examples section)
@@ -301,7 +301,7 @@ If `true`, remember cookies for future use (or define your custom cookie jar; se
 
 ## `agent`
 
-- Type: {[`http.Agent`](https://nodejs.org/dist/latest-v6.x/docs/api/http.html#http_class_http_agent) | [`https.Agent`](https://nodejs.org/dist/latest-v6.x/docs/api/https.html#https_class_https_agent)}
+- Type: [`http.Agent`](https://nodejs.org/dist/latest-v6.x/docs/api/http.html#http_class_http_agent) | [`https.Agent`](https://nodejs.org/dist/latest-v6.x/docs/api/https.html#https_class_https_agent)
 
 The `http(s).Agent` instance to use
 
@@ -321,7 +321,7 @@ and the [TLS/SSL guide](guides/tls-ssl-protocol.md#using-optionsagentoptions).
 
 ## `forever`
 
-- Type: {`boolean`}
+- Type: `boolean`
 - Default: `false`
 
 Set to `true` to use the [forever-agent](https://github.com/request/forever-agent).
@@ -329,7 +329,7 @@ Set to `true` to use the [forever-agent](https://github.com/request/forever-agen
 
 ## `pool`
 
-- Type: {`Object`}
+- Type: `Object`
 
 An object describing which agents to use for the request. If this option is omitted the request will use the global
 agent (as long as your options allow for it). Otherwise, request will search the pool for your custom agent. If no
@@ -344,7 +344,7 @@ option is not specified.
 
 ## `timeout`
 
-- Type: {`number`}
+- Type: `number`
 
 Integer containing the number of milliseconds to wait for a server to send response headers (and start the response
 body) before aborting the request. Note that if the underlying TCP connection cannot be established, the OS-wide TCP
@@ -355,7 +355,7 @@ seconds](http://www.sekuda.com/overriding_the_default_linux_kernel_20_second_tcp
 
 ## `localAddress`
 
-- Type: {`string`}
+- Type: `string`
 
 Local interface to bind for network connections.
 
@@ -368,7 +368,7 @@ embedding the auth info in the `uri`).
 
 ## `strictSSL`
 
-- Type: {`boolean`}
+- Type: `boolean`
 - Default: `false`
 
 If `true`, requires SSL certificates be valid. **Note:** to use your own certificate authority, you need to specify an
@@ -376,7 +376,7 @@ agent that was created with that CA as an option.
 
 ## `tunnel`
 
-- Type: {`boolean` | `undefined`}
+- Type: `boolean` | `undefined`
 - Default: `undefined`
 
 Controls the behavior of [HTTP `CONNECT` tunneling](https://en.wikipedia.org/wiki/HTTP_tunnel#HTTP_CONNECT_tunneling)
@@ -402,7 +402,7 @@ A whitelist of headers to send exclusively to a tunneling proxy and not to desti
 
 ## `time`
 
-- Type: {`boolean`}
+- Type: `boolean`
 
 If `true`, the request-response cycle (including all redirects) is timed at millisecond resolution, and the result
 provided on the response's `elapsedTime` property.
@@ -417,7 +417,7 @@ into options overwriting matching values *(see the [HAR 1.2 section](guides/supp
 
 ## `callback`
 
-- Type: {`Function`}
+- Type: `Function`
 
 Alternatively pass the request's callback in the options object.
 

@@ -16,4 +16,4 @@ This document describes the methods and properties added by the `request` packag
 This override allows you to safely use `JSON.stringify` on a `Response` instance.
 
 - **return**
-  - Type: {[`ResponseJSON`](../interfaces/response-json.md)}
+  - Type: [`ResponseJSON`](../interfaces/response-json.md)

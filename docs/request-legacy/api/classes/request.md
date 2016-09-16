@@ -12,7 +12,7 @@
 This override allows you to safely use `JSON.stringify` on a `Request` instance.
 
 - **return**
-  - Type: {[`RequestJSON`](../interfaces/request-json.md)}
+  - Type: [`RequestJSON`](../interfaces/request-json.md)
 
 
 ## Internal methods
@@ -131,7 +131,7 @@ Logs the arguments to the console (`console.error`) if the `NODE_DEBUG` environm
 
 ### `.debug`
 
-- Type: {`boolean`}
+- Type: `boolean`
 
 ### `.defaultProxyHeaderWhiteList`
 

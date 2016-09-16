@@ -1,6 +1,6 @@
 # ResponseJSON
 
-## `statusCode` {`number`}
+## `statusCode` (`number`)
 
 The status code of the `Response`
 
@@ -10,6 +10,6 @@ The status code of the `Response`
 
 The dictionary of the headers attached to the HTTP response.
 
-## `request` {`RequestJSON`}
+## `request` (`RequestJSON`)
 
 The request related to the `Response`.

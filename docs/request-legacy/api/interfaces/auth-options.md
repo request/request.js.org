@@ -6,19 +6,19 @@ Options for the HTTP Authentication.
 
 **TODO**
 
-#### `user` {`string`}
+#### `user` (`string`)
 
 Alias for `username`
 
-#### `username` {`string`}
+#### `username` (`string`)
 
 The username to use.
 
-#### `pass` {`string`}
+#### `pass` (`string`)
 
 Alias for `password`
 
-#### `password` {`string`}
+#### `password` (`string`)
 
 The password to use
 

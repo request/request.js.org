@@ -1,4 +1,4 @@
-# RequestJar
+# CookieJar
 
 This is a wrapper for the synchronous interface of [`tough-cookie`][tough-cookie]'s [`CookieJar`][tough-cookie-cookiejar].
 
@@ -11,17 +11,17 @@ This is a wrapper for the synchronous interface of [`tough-cookie`][tough-cookie
 Adds a cookie to the jar.
 
 - `cookieOrStr`
-  - Type: {[`Cookie`][tough-cookie-cookie] | `string`}
+  - Type: [`Cookie`][tough-cookie-cookie] | `string`
 
 - `uri`
-  - Type: {`string`}
+  - Type: `string`
 
 - `options`
-  - Type: {[`SetCookieOptions`][tough-cookie-cookiejar-setcookie]}
+  - Type: [`SetCookieOptions`][tough-cookie-cookiejar-setcookie]
   - Optional
 
 - **return**
-  - Type: {[`Cookie`][tough-cookie-cookie]}
+  - Type: [`Cookie`][tough-cookie-cookie]
   
   **TODO**: check if you get a copy or the same cookie when passing a [`Cookie`][tough-cookie-cookie] for `cookieOrStr`.
 
@@ -30,20 +30,20 @@ Adds a cookie to the jar.
 **TODO**: Add description
 
 - `uri`
-  - Type: {`string`}
+  - Type: `string`
 
 - **return**
-  - Type: {`string`}
+  - Type: `string`
 
 ### `.getCookies(uri)`
 
 **TODO**: Add description
 
 - `uri`
-  - Type: {`string`}
+  - Type: `string`
 
 - **return**
-  - Type: {`Array<`[`Cookie`][tough-cookie-cookie]`>`}
+  - Type: `Array<`[`Cookie`][tough-cookie-cookie]`>`
 
 
 

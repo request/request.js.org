@@ -1,8 +1,8 @@
 # RequestJSON
 
-## `uri` {`string` | `url.URL`}
+## `uri` (`string` | `url.URL`)
 
-## `method` {`string`}
+## `method` (`string`)
 
 The lowercase (**TODO: Check that**) name of the HTTP method.
 
