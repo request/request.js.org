@@ -1,8 +1,15 @@
 # RequestOptions
 
-`RequestOptions` describes the options supported by the `request` function.
-All the properties are optional (except if you do not provide an `uri` argument to the `request` call, then the property
-`uri` is required).
+The `RequestOptions` _interface_ describes the options of [the `request`'s
+main function](../main-module#call) and all of its specialized
+versions ([`.get`](../main-module#requestget-uri-options-callback),
+[`.post`](../main-module#requestpost-uri-options-callback),
+[`.delete`](../main-module#requestdelete-uri-options-callback), ...).
+
+**All the properties are optional (except if you do not provide an `uri`
+argument to the `request` call, then the property `uri` is required).**
+
+Here is a thematic overview of the supported properties:
 
 - General
   - [uri](#uri)
@@ -63,45 +70,115 @@ All the properties are optional (except if you do not provide an `uri` argument 
 
 ## `uri`
 
-- Type: `string` | [`Url`](https://nodejs.org/dist/latest-v6.x/docs/api/url.html)
+- Type: `string` | [`Url`][node-url]
 
-Fully qualified uri or a parsed url object from `url.parse()`.
+A fully qualified (absolute) [URI string][rfc-uri] or a parsed
+[`Url`][node-url] object from [`url.parse()`][node-url-parse] for the target
+of the request.
+
+If [`.baseUrl`](#baseurl) is defined, `.uri` must be a a `string` and is allowed
+to represent a relative URI.
+
+### Example:
+
+```js
+import url from 'url';
+import request from 'request';
+
+// Fully qualified URI
+request.get({uri: "http://example.com/api"});
+
+// Parsed Url object
+const parsedUrl = url.parse("http://example.com/api");
+request.get({uri: parsedUrl});
+```
 
 ## `url`
 
-- Type: `string` | [`Url`](https://nodejs.org/dist/latest-v6.x/docs/api/url.html)
+Alias for [`.uri`](#uri).
 
-Alias for [`uri`](#uri)
+_Note_: If you define both `.uri` and `.url`, `.uri` will be used and `.url`
+ignored.
 
 ## `baseUrl`
 
 - Type: `string`
 
-Fully qualified uri string used as the base url. Most useful with `request.defaults`, for example when you want to do
-many requests to the same domain.  If `baseUrl` is `https://example.com/api/`, then requesting `/end/point?test=true`
-will fetch `https://example.com/api/end/point?test=true`. When `baseUrl` is given, `uri` must also be a string.
+Fully qualified (absolute) [URI string][rfc-uri] used as the base url.
+This is especially useful with
+[`request.defaults`](../main-module.md#requestdefaultsoptions), for example
+when you want to do many requests to the same domain.
+
+When `.baseUrl` is given, [`.uri`](#uri) must also be a `string`.
+
+### Example
+
+```js
+import request from 'request';
+
+// Wrapper configured for the API of example.com
+const requestWrapper = request.defaults({baseUrl: "https://example.com/api/"});
+
+// Perform a GET request with the wrapped API
+const pendingRequest = requestWrapper.get({uri: "/endpoint?test=true"});
+
+// Log the absolute URI of the GET request
+console.log(pendingRequest.href); // https://example.com/api/endpoint?test=true
+```
 
 ## `method`
 
 - Type: `string`
 - Default: `"GET"`
 
-The HTTP method to use.
+The [HTTP request method][wikipedia-http-request-methods] to use.
+You can use custom methods if you need to.
+
+**TODO**: Check if you can really use custom methods.
+
+**TODO**: Is the case normalized before sending the request ?
 
 ## `headers`
 
-- Type: `Object`
+- Type: `object`
 - Default: `{}`
 
-The HTTP headers to send.
+A dictionary of additional HTTP request headers to send.
+The keys (`string`) are used as header names, the values are converted to
+strings.
+
+**TODO**: Check if the values are really converted to strings, how are handled
+  non-string (JSON.stringify ?).
+
+**TODO**: What is the interaction with `request.defaults` (replaces or extends).
 
 ---
 
 ## `qs`
 
-- Type: `Object`
+- Type: `object`
 
-A dictionary containing querystring values to be appended to the `uri`.
+A dictionary containing _querystring_ (qs) parameters to be appended to the
+`uri`.
+
+**TODO**: What is the interaction with `request.defaults` (replaces or extends).
+
+**TODO**: What is the interaction with the query string defined in `.uri`.
+
+### Example
+
+```js
+import request from 'request';
+
+// Simple usage
+const simpleRequest = request.get({uri: 'https://example.com/api/issues', qs: {perPage: 50, page: 2}});
+console.log(simpleRequest.href); // https://example.com/api/issues?perPage=50&page=2
+
+// Interaction with defaults and uri
+const issuesRequestWrapper = request.defaults({qs: {perPage: 50}});
+const complexRequest = issuesRequestWrapper.get({uri: 'https://example.com/api/issues?category=documentation', {qs: {page: 50}}});
+console.log(complexRequest.href); // ???
+```
 
 ## `qsParseOptions`
 
@@ -426,3 +503,9 @@ The callback argument gets 3 arguments:
 1. An `error` when applicable (usually from [`http.ClientRequest`](http://nodejs.org/api/http.html#http_class_http_clientrequest) object)
 2. A [`Response`](#../classes/response.md) object
 3. The third is the `response` body (`String` or `Buffer`, or JSON object if the `json` option is supplied)
+
+
+[node-url]: https://nodejs.org/dist/latest-v6.x/docs/api/url.html
+[node-url-parse]: https://nodejs.org/dist/latest-v6.x/docs/api/url.html#url_url_parse_urlstring_parsequerystring_slashesdenotehost
+[rfc-uri]: https://tools.ietf.org/html/rfc3986
+[wikipedia-http-request-methods]: https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods
