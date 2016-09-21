@@ -18,7 +18,7 @@ Here is a thematic overview of the supported properties:
   - [method](#method)
   - [headers](#headers)
 - Query String
-  - [qs](#qs-object)
+  - [qs](#qs)
   - [qsParseOptions](#qsparseoptions)
   - [qsStringifyOptions](#qsstringifyoptions)
   - [useQuerystring](#usequerystring)
@@ -171,39 +171,131 @@ A dictionary containing _querystring_ (qs) parameters to be appended to the
 import request from 'request';
 
 // Simple usage
-const simpleRequest = request.get({uri: 'https://example.com/api/issues', qs: {perPage: 50, page: 2}});
+const simpleRequest = request.get({
+  uri: 'https://example.com/api/issues',
+  qs: {perPage: 50, page: 2}
+});
 console.log(simpleRequest.href); // https://example.com/api/issues?perPage=50&page=2
 
 // Interaction with defaults and uri
 const issuesRequestWrapper = request.defaults({qs: {perPage: 50}});
-const complexRequest = issuesRequestWrapper.get({uri: 'https://example.com/api/issues?category=documentation', {qs: {page: 50}}});
-console.log(complexRequest.href); // ???
+const complexRequest = issuesRequestWrapper.get({
+  uri: 'https://example.com/api/issues?category=documentation',
+  qs: {page: 50}
+});
+console.log(complexRequest.href); // TODO: what is the result ?
 ```
 
 ## `qsParseOptions`
 
-- Type: `Object`
+- Type: [`object`][gh-qs-parse] | `{seq?: string; eq?: string; options?: object}`
+- Default: **TODO**
 
-Object containing options to pass to the [qs.parse](https://github.com/hapijs/qs#parsing-objects) method. Alternatively
-pass options to the [querystring.parse](https://nodejs.org/docs/v0.12.0/api/querystring.html#querystring_querystring_parse_str_sep_eq_options)
-method using this format `{sep:';', eq:':', options:{}}`.
+This option controls the way query strings are parsed, for example in `.uri`.
+(**TODO**: check if it is used for `uri`)
+
+**This option depends on the chosen library to handle query string
+serialization. This choice is determined
+by [the `.useQuerystring` option](#usequerystring)).**
+
+
+- **If [`.useQuerystring`](#usequerystring) is `false` (default)**:  
+  Query strings will be parsed with the [parse][gh-qs-parse] function from
+  [the `qs` library][gh-qs]. `.qsParseOptions` is directly passed to
+  [`qs.parse`][gh-qs-parse] and allows you to configure the way the query
+  string is parsed. See the [`qs.parse` documentation][gh-qs-parse]
+  for more details.
+  (**TODO**: include the most important parts here)
+
+- **If [`.useQuerystring`](#usequerystring) is set to `true`**:  
+  Query strings will be parsed with the [parse][node-querystring-parse] function
+  from [Node's `querystring` module][node-querystring]. You can pass an
+  object with the following interface:
+  - `sep` (type: `string`, optional, default: `'&'`): The substring used to
+    delimit key and value pairs in the query string (second argument of
+    [`querystring.parse`][node-querystring-parse]).
+  - `eq` (type: `string`, optional, default: `'='`): The substring used to
+    delimit keys and values in the query string. (third argument of
+    [`querystring.parse`][node-querystring-parse]).
+  - `options` (type: [`object`][node-querystring-parse], optional,
+    default: `{}`): Additional options (last argument of
+    [`querystring.parse`][node-querystring-parse]).
 
 ## `qsStringifyOptions`
 
-- Type: `Object`
+- Type: [ `object` ][gh-qs-stringify]
+- Default: **TODO**
 
-Object containing options to pass to the [qs.stringify](https://github.com/hapijs/qs#stringifying) method. Alternatively
-pass options to the  [querystring.stringify](https://nodejs.org/docs/v0.12.0/api/querystring.html#querystring_querystring_stringify_obj_sep_eq_options)
-method using this format `{sep:';', eq:':', options:{}}`. For example, to change the way arrays are converted to query
-strings using the `qs` module pass the `arrayFormat` option with one of `indices|brackets|repeat`.
+This option controls the way query string data are stringify'ed.
+(**TODO**: check if it is used for `uri`)
+
+**This option depends on the chosen library to handle query string
+serialization. This choice is determined
+by [the `.useQuerystring` option](#usequerystring)).**
+
+
+- **If [`.useQuerystring`](#usequerystring) is `false` (default)**:  
+  Query string data are stringify'ed with the [stringify][gh-qs-stringify]
+  function from [the `qs` library][gh-qs]. `.qsStringifyOptions` is directly
+  passed to [`qs.parse` documentation][gh-qs-parse] and allows you to configure
+  the way the query string data are serialized. See the [`qs.stringify`
+  documentation][gh-qs-stringify] for more details.
+  (**TODO**: include the most important parts here)
+
+- **If [`.useQuerystring`](#usequerystring) is set to `true`**:  
+  Query string data are stringify'ed with the
+  [stringify][node-querystring-stringify] function from [Node's
+  `querystring` module][node-querystring]. You can pass an
+  object with the following interface:
+  - `sep` (type: `string`, optional, default: `'&'`): The substring used to
+    delimit key and value pairs in the query string (second argument of
+    [`querystring.stringify`][node-querystring-stringify]).
+  - `eq` (type: `string`, optional, default: `'='`): The substring used to
+    delimit keys and values in the query string. (third argument of
+    [`querystring.stringify`][node-querystring-stringify]).
+  - `options` (type: [`object`][node-querystring-stringify], optional,
+    default: `{}`): Additional options (last argument of
+    [`querystring.stringify`][node-querystring-stringify]).
+
+### Example:
+
+Change the way arrays are converted to query strings: `foo=bar&foo=baz`
+instead of the default `foo[0]=bar&foo[1]=baz`.
+
+
+```js
+import request from 'request';
+
+const pendingRequest = request.get({
+  uri: 'https://example.com',
+  qs: {'foo': ['bar', 'baz']},
+  qsStringifyOptions: {
+    arrayFormat: 'repeat'
+  }
+})
+console.log(pendingRequest.href); // TODO: what is the result ?
+```
 
 ## `useQuerystring`
 
 - Type: `boolean`
 - Default : `false`
 
-If true, use `querystring` to stringify and parse querystrings, otherwise use `qs`. Set this option to `true` if you
-need arrays to be serialized as `foo=bar&foo=baz` instead of the default `foo[0]=bar&foo[1]=baz`.
+`request` can use two libraries to stringify and parse your query strings:
+[Node's `querystring` module][node-querystring] or the preferred [third-party
+library `qs`][gh-qs]. The implication on "stringification" and parsing are
+respectively explained in [`.qsStringifyOptions`](#qsstringifyoptions) and
+[`.qsParseOptions`](#qsparseoptions).
+                          
+
+- By default or if `.useQuerystring` is `false`, `request` will
+  use [`qs`][gh-qs].
+- If `.useQuerystring` is set to `true`, `request` will use [Node's
+  `querystring`][node-querystring]
+
+**Note**: The options [`.qsStringifyOptions`](#qsstringifyoptions) and
+[`.qsParseOptions`](#qsparseoptions) depend on the library you choose
+with this flag.
 
 ---
 
@@ -505,6 +597,12 @@ The callback argument gets 3 arguments:
 3. The third is the `response` body (`String` or `Buffer`, or JSON object if the `json` option is supplied)
 
 
+[gh-qs]: https://github.com/hapijs/qs
+[gh-qs-parse]: https://github.com/hapijs/qs#parsing-objects
+[gh-qs-stringify]: https://github.com/ljharb/qs#stringifying
+[node-querystring]: https://nodejs.org/api/querystring.html
+[node-querystring-parse]: https://nodejs.org/api/querystring.html#querystring_querystring_parse_str_sep_eq_options
+[node-querystring-stringify]: https://nodejs.org/api/querystring.html#querystring_querystring_stringify_obj_sep_eq_options
 [node-url]: https://nodejs.org/dist/latest-v6.x/docs/api/url.html
 [node-url-parse]: https://nodejs.org/dist/latest-v6.x/docs/api/url.html#url_url_parse_urlstring_parsequerystring_slashesdenotehost
 [rfc-uri]: https://tools.ietf.org/html/rfc3986
