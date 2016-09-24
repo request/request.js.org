@@ -72,7 +72,7 @@ Here is a thematic overview of the supported properties:
 
 - Type: `string` | [`Url`][node-url]
 
-A fully qualified (absolute) [URI string][rfc-uri] or a parsed
+A fully qualified (scheme, domain and path) [URI string][rfc-uri] or a parsed
 [`Url`][node-url] object from [`url.parse()`][node-url-parse] for the target
 of the request.
 
@@ -104,7 +104,8 @@ ignored.
 
 - Type: `string`
 
-Fully qualified (absolute) [URI string][rfc-uri] used as the base url.
+Fully qualified (scheme, domain and path) [URI string][rfc-uri] used as the base
+URL.
 This is especially useful with
 [`request.defaults`](../main-module.md#requestdefaultsoptions), for example
 when you want to do many requests to the same domain.
@@ -122,7 +123,7 @@ const requestWrapper = request.defaults({baseUrl: "https://example.com/api/"});
 // Perform a GET request with the wrapped API
 const pendingRequest = requestWrapper.get({uri: "/endpoint?test=true"});
 
-// Log the absolute URI of the GET request
+// Log the full URI of the GET request
 console.log(pendingRequest.href); // https://example.com/api/endpoint?test=true
 ```
 
