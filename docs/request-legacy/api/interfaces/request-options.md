@@ -132,11 +132,9 @@ console.log(pendingRequest.href); // https://example.com/api/endpoint?test=true
 - Default: `"GET"`
 
 The [HTTP request method][wikipedia-http-request-methods] to use.
-You can use custom methods if you need to.
+There are no restrictions on the name of method.
 
-**TODO**: Check if you can really use custom methods.
-
-**TODO**: Is the case normalized before sending the request ?
+**TODO**: Is the case normalized ?
 
 ## `headers`
 
@@ -161,9 +159,20 @@ strings.
 A dictionary containing _querystring_ (qs) parameters to be appended to the
 `uri`.
 
-**TODO**: What is the interaction with `request.defaults` (replaces or extends).
 
-**TODO**: What is the interaction with the query string defined in `.uri`.
+**Interaction with `request.defaults`**: The current options are deeply merged
+to the wrapper's options (which is the base object). This means that atomic
+values (strings, numbers, booleans, null, undefined, NaN, Infinity, ...) are
+replaced (current options override the wrapper's options), plain objects are
+merged recursively. Arrays are extended up to the max of both then values at
+the same index are merged.
+**TODO**: How are non-plain objects merged ?
+**TODO**: What happens if the options have the same key with different types ?
+**TODO**: Move the explanation about options merging to a common place.
+
+**Interaction with `.uri`**: The data in `.qs` is merged to the query-string
+data eventually in `.uri`. If a key is both defined in `.uri` and `.qs`, the one
+defined in `.qs` is used.
 
 ### Example
 
@@ -175,15 +184,15 @@ const simpleRequest = request.get({
   uri: 'https://example.com/api/issues',
   qs: {perPage: 50, page: 2}
 });
-console.log(simpleRequest.href); // https://example.com/api/issues?perPage=50&page=2
+console.log(simpleRequest.url.href); // https://example.com/api/issues?perPage=50&page=2
 
 // Interaction with defaults and uri
 const issuesRequestWrapper = request.defaults({qs: {perPage: 50}});
 const complexRequest = issuesRequestWrapper.get({
   uri: 'https://example.com/api/issues?category=documentation',
-  qs: {page: 50}
+  qs: {category: "fiz"}
 });
-console.log(complexRequest.href); // TODO: what is the result ?
+console.log(complexRequest.url.href); // https://example.com/api/issues?category=documentation&perPage=50&page=50
 ```
 
 ## `qsParseOptions`
@@ -273,7 +282,7 @@ const pendingRequest = request.get({
     arrayFormat: 'repeat'
   }
 })
-console.log(pendingRequest.href); // TODO: what is the result ?
+console.log(pendingRequest.url.href); // https://example.com/?foo=bar&foo=baz
 ```
 
 ## `useQuerystring`
