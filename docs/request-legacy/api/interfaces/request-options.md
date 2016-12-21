@@ -82,8 +82,8 @@ to represent a relative URI.
 ### Example:
 
 ```js
-import url from 'url';
-import request from 'request';
+import * as url from 'url';
+import request = require('request');
 
 // Fully qualified URI
 request.get({uri: "http://example.com/api"});
@@ -115,7 +115,7 @@ When `.baseUrl` is given, [`.uri`](#uri) must also be a `string`.
 ### Example
 
 ```js
-import request from 'request';
+import request = require('request');
 
 // Wrapper configured for the API of example.com
 const requestWrapper = request.defaults({baseUrl: "https://example.com/api/"});
@@ -178,7 +178,7 @@ defined in `.qs` is used.
 ### Example
 
 ```js
-import request from 'request';
+import request = require('request');
 
 // Simple usage
 const simpleRequest = request.get({
@@ -274,7 +274,7 @@ instead of the default `foo[0]=bar&foo[1]=baz`.
 
 
 ```js
-import request from 'request';
+import request = require('request');
 
 const pendingRequest = request.get({
   uri: 'https://example.com',

@@ -8,7 +8,7 @@ var request = require('request');
 ```
 **Javascript ES6** (Typescript) syntax
 ```ts
-import request from 'request';
+import request = require('request');
 ```
 
 Here is an overview of the available functions:

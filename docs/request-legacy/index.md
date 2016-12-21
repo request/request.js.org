@@ -32,7 +32,7 @@ var request = require("request");
 ### Javascript ES6 (Typescript)
 
 ```ts
-import * as request from "request";
+import request = require("request");
 ```
 
 Note that the exported value is a *function* instead of a [namespace object][namespace-object].
